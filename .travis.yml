@@ -5,3 +5,5 @@ script:
   - >-
     docker build --build-arg BUILD_VERSION=${TRAVIS_BUILD_NUMBER}
     --build-arg COMMIT_SHA=$(git rev-parse HEAD) -t anz-test2 .
+  - docker run -p 5000:5000 anz-test2
+  - curl localhost:5000/healtcheck | grep $(git rev-parse HEAD)

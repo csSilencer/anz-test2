@@ -18,10 +18,11 @@ WORKDIR /usr/src/app
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+
 COPY --from=test ./anz-test2.py .
-COPY --from=test ./requirements.txt .
 COPY --from=test ./inject_build_metadata.sh .
 COPY --from=test ./build_metadata.json .
+
 RUN ./inject_build_metadata.sh
 
 EXPOSE 5000
