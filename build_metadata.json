@@ -1,4 +1,1 @@
-{
-  "version": "1.0",
-  "lastcommitsha": "abc123"
-}
+{"lastcommitsha": "BUILD_VERSION", "version": "COMMIT_SHA"}

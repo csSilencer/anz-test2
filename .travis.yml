@@ -2,4 +2,6 @@ services:
   - docker
 
 script:
-  - docker build -t anz-test2 .
+  - >-
+    docker build --build_arg BUILD_VERSION=${TRAVIS_BUILD_NUMBER}
+    --build-arg COMMIT_SHA=$(git rev-parse HEAD) -t anz-test2 .
