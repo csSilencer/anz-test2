@@ -23,6 +23,9 @@ docker build --build-arg BUILD_VERSION=2 --build-arg COMMIT_SHA=abc123 -t anz-te
 docker run -p 5000:5000 anz-test2
 ```
 
+## Testing & Linting
+- Linting implemented as part of the dockerbuild, if ./linting.sh fails, build fails
+- Simple unit test provided testing with stubbed metadata that the expected response format is returned
 ## Server implementation
 - A simple python webapp with the required healthcheck endpoint [Flask](http://flask.pocoo.org/)
 

@@ -41,10 +41,10 @@ def hello():
     """
     return "Hello World!"
 
-@APP.route("/healthcheck")
-def healthcheck():
+def prepare_health_check_payload():
     """
-    endpoint for the assessment
+    Prepare the healt check payload outside of flask
+    context so it's actually callable in test
     :return:
     """
     time_now = time.time()
@@ -59,7 +59,16 @@ def healthcheck():
             }
         ]
     }
-    return jsonify(hc_payload)
+
+    return hc_payload
+
+@APP.route("/healthcheck")
+def healthcheck():
+    """
+    endpoint for the assessment
+    :return:
+    """
+    return jsonify(prepare_health_check_payload())
 
 if __name__ == "__main__":
     APP.run(host="0.0.0.0")
