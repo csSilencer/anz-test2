@@ -4,7 +4,8 @@ Test for ANZ Technical Interview
 ## Building the Application Artefact
 
 ### Commands
-- docker build --build-arg BUILD_VERSION=2 --build-arg COMMIT_SHA=abc123 -t anz-test2 .
+`docker build --build-arg BUILD_VERSION=2 --build-arg COMMIT_SHA=abc123 -t anz-test2 .`
+
 - A git commit will trigger the Travis CI Build - [GitHub](https://travis-ci.org/csSilencer/anz-test2) - Also see [.travis.yml](.travis.yml)
 
 ### Notes on Implementation of build:
@@ -16,9 +17,11 @@ Test for ANZ Technical Interview
 - When passing the build metadata through build arguments, this gives us the ability to pull in metadata from our build tool, Travis CI in this instance.
 
 ## Running the Application
-- docker build --build-arg BUILD_VERSION=2 --build-arg COMMIT_SHA=abc123 -t anz-test2 .
-- Take the build image
-- docker run -p 5000:5000 anz-test2
+
+```bash
+docker build --build-arg BUILD_VERSION=2 --build-arg COMMIT_SHA=abc123 -t anz-test2 .```
+docker run -p 5000:5000 anz-test2
+```
 
 ## Server implementation
 - A simple python webapp with the required healthcheck endpoint [Flask](http://flask.pocoo.org/)
