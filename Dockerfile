@@ -1,11 +1,20 @@
-FROM python:latest
+FROM python:latest as test
+
+COPY . .
+
+RUN pip install --no-cache-dir -r requirements_test.txt
+
+RUN ./linting.sh
+
+FROM python:latest as package
 
 WORKDIR /usr/src/app
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+COPY --from=test ./anz-test2.py .
+COPY --from=test ./requirements.txt .
+COPY --from=test ./build_metadata.json .
 
-COPY . .
+RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 5000
 

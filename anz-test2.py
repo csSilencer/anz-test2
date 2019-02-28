@@ -1,39 +1,52 @@
-from flask import Flask
-from flask import jsonify
+"""
+Simple python flask app for the anz assessment
+
+"""
 import logging
 import time
 import json
-from datetime import datetime
+from flask import Flask
+from flask import jsonify
 
 logging.basicConfig(level=logging.INFO)
 
 START_TIME = time.time()
 
-app = Flask(__name__)
+APP = Flask(__name__)
 
 def _load_json_files_into_dict(filename):
-
+    """
+    dummy
+    :param filename:
+    :return:
+    """
     json_payload = None
 
     try:
         with open(filename) as file_obj:
             json_payload = json.load(file_obj)
-            logging.info("Loaded filename successfully: " + filename)
-    except Exception as e:
-        logging.info("Unable to load filename: " + filename)
-        logging.info(e)
+            logging.info("Loaded filename successfully")
+    except IOError:
+        logging.info("Unable to load file")
 
     return json_payload
 
 BUILD_METADATA = _load_json_files_into_dict("build_metadata.json")
 
-@app.route("/")
+@APP.route("/")
 def hello():
+    """
+    base endpoint
+    :return:
+    """
     return "Hello World!"
 
-@app.route("/healthcheck")
+@APP.route("/healthcheck")
 def healthcheck():
-
+    """
+    endpoint for the assessment
+    :return:
+    """
     time_now = time.time()
 
     hc_payload = {
@@ -49,4 +62,4 @@ def healthcheck():
     return jsonify(hc_payload)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+    APP.run(host="0.0.0.0")
